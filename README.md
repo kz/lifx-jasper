@@ -12,4 +12,4 @@ Code examples will be included once this project is functional.
 3. Boot Jasper and you should be ready to go!
 
 ## License
-Please see [license.md](license.md) for more details.
+Please see [LICENSE.md](LICENSE.md) for more details.

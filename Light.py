@@ -1,9 +1,16 @@
 # -*- coding: utf-8-*-
-import random
+import os
 import re
 from client import jasperpath
+import subprocess
 
 WORDS = ["LIGHT", "LIGHTS", "ON", "OFF"]
+
+home = os.getenv("HOME")
+config_path = home + "/.config/lifx-jasper/lifx-cli-path"
+f = open(config_path, 'r')
+lifx_cli_path = f.readline().rstrip()
+f.close()
 
 
 def handle(text, mic, profile):
@@ -19,12 +26,16 @@ def handle(text, mic, profile):
 
     if isOn(text):
         mic.say('Turning lights on.')
+        return_code = subprocess.call(lifx_cli_path + " on")
     elif isOff(text):
         mic.say('Turning lights off.')
+        return_code = subprocess.call(lifx_cli_path + " off")
     else:
         mic.say('Toggling lights.')
+        return_code = subprocess.call(lifx_cli_path + " toggle")
 
-    mic.say(text)
+    if return_code != 0:
+        mic.say("Error. Try again.")
 
 
 def isValid(text):

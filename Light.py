@@ -27,9 +27,7 @@ def handle(text, mic, profile):
     """
 
     if isOn(text):
-
         print 'Turning lights on.'
-
         if config['force-cloud']:
             sendCloud('on', mic)
         else:
@@ -39,11 +37,11 @@ def handle(text, mic, profile):
             if len(devices) > 0:
                 power(devices, 'power on')
             elif config['cloud-fallback']:
+                print 'Falling back to cloud.'
                 sendCloud('on', mic)
 
     elif isOff(text):
         print 'Turning lights off.'
-
         if config['force-cloud']:
             sendCloud('off', mic)
         else:
@@ -54,12 +52,11 @@ def handle(text, mic, profile):
                 time.sleep(1)
                 power(devices, 'power off')
             elif config['cloud-fallback']:
+                print 'Falling back to cloud.'
                 sendCloud('off', mic)
 
     else:
-
         print 'Toggling lights.'
-
         if config['force-cloud']:
             sendCloud('toggle', mic)
         else:
@@ -70,6 +67,7 @@ def handle(text, mic, profile):
                 time.sleep(1)
                 toggle(devices)
             elif config['cloud-fallback']:
+                print 'Falling back to cloud.'
                 sendCloud('toggle', mic)
 
 
@@ -110,4 +108,4 @@ def power(devices, state='off'):
 def toggle(devices):
     for l in devices:
         print 'Toggling %s' % l.label
-        l.toggle()
+        l.power_toggle()

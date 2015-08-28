@@ -1,8 +1,9 @@
 # -*- coding: utf-8-*-
 import os
 import re
-from client import jasperpath
 import subprocess
+import lifx
+import time
 
 WORDS = ["LIGHT", "LIGHTS", "ON", "OFF"]
 
@@ -24,18 +25,30 @@ def handle(text, mic, profile):
                    number)
     """
 
-    if isOn(text):
-        mic.say('Turning lights on.')
-        return_code = subprocess.call(lifx_cli_path + " on")
-    elif isOff(text):
-        mic.say('Turning lights off.')
-        return_code = subprocess.call(lifx_cli_path + " off")
-    else:
-        mic.say('Toggling lights.')
-        return_code = subprocess.call(lifx_cli_path + " toggle")
+    lights = lifx.Client()
+    time.sleep(1)
 
-    if return_code != 0:
-        mic.say("Error. Try again.")
+    if isOn(text):
+        print 'Turning lights on.'
+        # return_code = subprocess.call(lifx_cli_path + " on", shell=True)
+        for l in lights.get_devices():
+            print 'Turning on %s' % l.label
+            l.power = True
+    elif isOff(text):
+        print 'Turning lights off.'
+        return_code = subprocess.call(lifx_cli_path + " off", shell=True)
+        for l in lights.get_devices():
+            print 'Turning off %s' % l.label
+            l.power = False
+    else:
+        print 'Toggling lights.'
+        for l in lights.get_devices():
+            print 'Toggling %s' % l.label
+            l.toggle()
+        # return_code = subprocess.call(lifx_cli_path + " toggle", shell=True)
+
+    # if return_code != 0:
+    #     mic.say("Error. Try again.")
 
 
 def isValid(text):

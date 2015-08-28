@@ -34,10 +34,10 @@ def handle(text, mic, profile):
             sendCloud('on', mic)
         else:
             lights = lifx.Client()
+            time.sleep(1)
             devices = lights.get_devices()
             if len(devices) > 0:
-                time.sleep(1)
-                power(devices, 'on')
+                power(devices, 'power on')
             elif config['cloud-fallback']:
                 sendCloud('on', mic)
 
@@ -48,10 +48,11 @@ def handle(text, mic, profile):
             sendCloud('off', mic)
         else:
             lights = lifx.Client()
+            time.sleep(1)
             devices = lights.get_devices()
             if len(devices) > 0:
                 time.sleep(1)
-                power(devices, 'off')
+                power(devices, 'power off')
             elif config['cloud-fallback']:
                 sendCloud('off', mic)
 
@@ -63,6 +64,7 @@ def handle(text, mic, profile):
             sendCloud('toggle', mic)
         else:
             lights = lifx.Client()
+            time.sleep(1)
             devices = lights.get_devices()
             if len(devices) > 0:
                 time.sleep(1)

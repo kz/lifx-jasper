@@ -78,7 +78,7 @@ def isValid(text):
         Arguments:
         text -- user-input, typically transcribed speech
     """
-    return bool(re.search(r'\blight\b', text, re.IGNORECASE))
+    return bool(re.search(r'\b(light|lights)\b', text, re.IGNORECASE))
 
 
 def isOn(text):

@@ -6,7 +6,7 @@ import lifx
 import time
 import yaml
 
-WORDS = ["LIGHT", "LIGHTS", "ON", "OFF"]
+WORDS = ["LIGHT", "LIGHTS", "ON", "OFF", "OF", "ENABLE", "DISABLE"]
 
 home = os.getenv("HOME")
 config_path = home + "/.lifx-jasper/config.yml"
@@ -67,11 +67,11 @@ def isValid(text):
 
 
 def isOn(text):
-    return bool(re.search(r'\bon\b', text, re.IGNORECASE))
+    return bool(re.search(r'\b(on|enable)\b', text, re.IGNORECASE))
 
 
 def isOff(text):
-    return bool(re.search(r'\boff\b', text, re.IGNORECASE))
+    return bool(re.search(r'\b(off|disable|of)\b', text, re.IGNORECASE))
 
 
 def sendCloud(parameter, mic):

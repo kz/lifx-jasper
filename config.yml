@@ -4,3 +4,4 @@ personal-access-token: 000000000000000000000000000000000000000000000000000000000
 
 # Optional
 force-cloud: false # Use 'true' to force use of LIFX Cloud API via lifx-cli and disable LAN-based discovery
+cloud-fallback: true # Fall back to cloud if LAN-based discovery does not discover any lights

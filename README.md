@@ -16,7 +16,7 @@ Code examples will be included once this project is functional.
 3. Clone [lifx-cli](https://github.com/Rawa/lifx-cli) to a folder such as `~/lifx-cli`
 4. Follow the lifx-cli installation in its README, including the creation of its `lifx-token` file
 5. Run `sudo pip install lifx-sdk` to install the [Python LIFX SDK](https://github.com/smarthall/python-lifx-sdk).
-6. Create the file `~/.lifx-jasper/config.yml` based on this repository's `config.yml.example` file
+6. Create the file `~/.lifx-jasper/config.yml` based on this repository's `config.yml` file
 7. Boot Jasper and you should be ready to go!
 
 ## License

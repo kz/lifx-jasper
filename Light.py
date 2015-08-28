@@ -83,7 +83,7 @@ def sendCloud(parameter, mic):
 
 def power(devices, state='off'):
     for l in devices:
-        print 'Turning %s %s' % state, l.label
+        print 'Turning %s %s' % (state, l.label)
         if state == 'on':
             l.power = True
         elif state == 'off':

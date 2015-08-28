@@ -6,7 +6,7 @@ import lifx
 import time
 import yaml
 
-WORDS = ["LIGHT", "LIGHTS", "ON", "OFF", "OF", "ENABLE", "DISABLE"]
+WORDS = ["LIGHT", "LIGHTS", "ON", "OFF", "OF", "ENABLE", "DISABLE", "TOGGLE"]
 
 home = os.getenv("HOME")
 config_path = home + "/.lifx-jasper/config.yml"

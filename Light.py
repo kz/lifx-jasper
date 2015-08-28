@@ -30,7 +30,7 @@ def handle(text, mic, profile):
 
         print 'Turning lights on.'
 
-        if config['force_cloud']:
+        if config['force-cloud']:
             sendCloud('on', mic)
         else:
             lights = lifx.Client()
@@ -39,7 +39,7 @@ def handle(text, mic, profile):
     elif isOff(text):
         print 'Turning lights off.'
 
-        if config['force_cloud']:
+        if config['force-cloud']:
             sendCloud('off', mic)
         else:
             lights = lifx.Client()
@@ -48,7 +48,7 @@ def handle(text, mic, profile):
     else:
         print 'Toggling lights.'
 
-        if config['force_cloud']:
+        if config['force-cloud']:
             sendCloud('toggle', mic)
         else:
             lights = lifx.Client()

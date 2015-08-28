@@ -1,0 +1,6 @@
+# Configuration (Required)
+lifx-cli-path: ~/lifx-cli/lifx # Path to lifx-cli's lifx file
+personal-access-token: 0000000000000000000000000000000000000000000000000000000000000000 # Personal access token from https://cloud.lifx.com/settings
+
+# Optional
+force-cloud: false # Use 'true' to force use of LIFX Cloud API via lifx-cli and disable LAN-based discovery

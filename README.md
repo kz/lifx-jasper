@@ -21,12 +21,10 @@ Requires Python 2.7+.
 ## Usage and Commands
 To activate the LIFX module, your speech command must include `light` or `lights`. For example, you can say `lights on` to turn all lights on. Here is a list of other commands:
 
-- `on` or `enable` - Turns all lights on
-- `off` or `disable` - Turns all lights off
-- Just saying `light` or `lights` toggles all lights
-
-To implement:
-- Presets
+- `on` or `enable` - Turns all lights on - e.g., `lights on`
+- `off` or `disable` - Turns all lights off - e.g., `lights off`
+- `preset [preset]` changes the light color to the specified preset's color (from config.yml) and turns the light on (if it is switched off). Specified in config.yml, the preset names range from `alpha` to `echo` - e.g., `lights toggle alpha`
+- Just saying `light` or `lights` toggles all lights - e.g., `lights`
 
 ## License
 Please see [LICENSE.md](LICENSE.md) for more details.

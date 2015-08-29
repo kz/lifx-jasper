@@ -6,7 +6,8 @@ import lifx
 import time
 import yaml
 
-WORDS = ["LIGHT", "LIGHTS", "ON", "OFF", "OF", "ENABLE", "DISABLE", "TOGGLE"]
+WORDS = ["LIGHT", "LIGHTS", "ON", "OFF", "OF", "ENABLE", "DISABLE", "TOGGLE", "PRESET", "ALPHA", "BRAVO", "CHARLIE",
+         "DELTA", "ECHO"]
 
 home = os.getenv("HOME")
 config_path = home + "/.lifx-jasper/config.yml"
@@ -15,7 +16,7 @@ config = yaml.load(f)
 f.close()
 
 
-def handle(text, mic, profile):
+def handle(text, mic):
     """
         Responds to user-input, typically speech text, by turning a light on/off
 
@@ -39,6 +40,8 @@ def handle(text, mic, profile):
             elif config['cloud-fallback']:
                 print 'Falling back to cloud.'
                 sendCloud('power on', mic)
+            else:
+                mic.say("No devices found. Please try again.")
 
     elif isOff(text):
         print 'Turning lights off.'
@@ -54,6 +57,31 @@ def handle(text, mic, profile):
             elif config['cloud-fallback']:
                 print 'Falling back to cloud.'
                 sendCloud('power off', mic)
+            else:
+                mic.say("No devices found. Please try again.")
+
+    elif isPreset(text):
+        preset = getPreset(text)
+        if not preset:
+            mic.say("The preset you stated is invalid. Please try again.")
+        else:
+            print 'Setting preset.'
+            colors = config['presets'][preset]
+
+            lights = lifx.Client()
+            time.sleep(1)
+            devices = lights.get_devices()
+            if len(devices) > 0:
+                color = lifx.color.HSBK(colors['hue'], colors['saturation'], colors['brightness'], colors['kelvin'])
+                setPreset(devices, color)
+            # lifx-cli does not work with this; investigating
+            # elif config['cloud-fallback']:
+            #     print 'Falling back to cloud.'
+            #     sendCloud(
+            #         'color -h {} -s {} -b {} -k {}'.format(colors['hue'], colors['saturation'], colors['brightness'],
+            #                                                colors['kelvin']), mic)
+            else:
+                mic.say("No devices found. Please try again.")
 
     else:
         print 'Toggling lights.'
@@ -69,6 +97,8 @@ def handle(text, mic, profile):
             elif config['cloud-fallback']:
                 print 'Falling back to cloud.'
                 sendCloud('toggle', mic)
+            else:
+                mic.say("No devices found. Please try again.")
 
 
 def isValid(text):
@@ -87,6 +117,25 @@ def isOn(text):
 
 def isOff(text):
     return bool(re.search(r'\b(off|disable|of)\b', text, re.IGNORECASE))
+
+
+def isPreset(text):
+    return bool(re.search(r'\bpreset\b', text, re.IGNORECASE))
+
+
+def getPreset(text):
+    if bool(re.search(r'\b(alpha)\b', text, re.IGNORECASE)):
+        return 'alpha'
+    elif bool(re.search(r'\b(bravo)\b', text, re.IGNORECASE)):
+        return 'bravo'
+    elif bool(re.search(r'\b(charlie)\b', text, re.IGNORECASE)):
+        return 'charlie'
+    elif bool(re.search(r'\b(delta)\b', text, re.IGNORECASE)):
+        return 'delta'
+    elif bool(re.search(r'\b(echo)\b', text, re.IGNORECASE)):
+        return 'echo'
+    else:
+        return False
 
 
 def sendCloud(parameter, mic):
@@ -109,3 +158,12 @@ def toggle(devices):
     for l in devices:
         print 'Toggling %s' % l.label
         l.power_toggle()
+
+
+def setPreset(devices, color):
+    for l in devices:
+        if not l.power:
+            l.color = color
+            l.fade_power(True)
+        else:
+            l.fade_color(color)

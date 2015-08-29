@@ -8,6 +8,8 @@ lifx-jasper utilises:
 The reason for building this project is because I have a single LIFX light situated in my bedroom which I would like to control using my voice. Therefore, this repository will not have the handling of individual lights in mind, although it may be something I will consider in the future.
 
 ## Installation
+Requires Python 2.7+.
+
 1. Navigate to `~/jasper/client/modules` folder, assuming that your Jasper files are situated under your home directory
 2. Clone this repository into `/tmp` or any temporary folder that can be deleted afterwards and move `Light.py` into the modules folder
 3. Clone [lifx-cli](https://github.com/Rawa/lifx-cli) to a folder such as `~/lifx-cli`

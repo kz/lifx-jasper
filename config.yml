@@ -4,16 +4,32 @@ personal-access-token: 000000000000000000000000000000000000000000000000000000000
 
 # Optional
 force-cloud: false # Use 'true' to force use of LIFX Cloud API via lifx-cli and disable LAN-based discovery
-cloud-fallback: true # Fall back to cloud if LAN-based discovery does not discover any lights`
+cloud-fallback: true # Fall back to cloud if LAN-based discovery does not discover any lights
 
 # Presets
 presets:
   alpha:
-
+    hue: 360
+    saturation: 1.0
+    brightness: 1.0
+    kelvin: 9000
   bravo:
-
+    hue: 360
+    saturation: 1.0
+    brightness: 1.0
+    kelvin: 9000
   charlie:
-
+    hue: 360
+    saturation: 1.0
+    brightness: 1.0
+    kelvin: 9000
   delta:
-
+    hue: 360
+    saturation: 1.0
+    brightness: 1.0
+    kelvin: 9000
   echo:
+    hue: 360
+    saturation: 1.0
+    brightness: 1.0
+    kelvin: 9000

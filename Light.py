@@ -16,7 +16,7 @@ config = yaml.load(f)
 f.close()
 
 
-def handle(text, mic):
+def handle(text, mic, profile):
     """
         Responds to user-input, typically speech text, by turning a light on/off
 
